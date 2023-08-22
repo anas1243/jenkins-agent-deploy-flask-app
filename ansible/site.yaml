@@ -1,0 +1,12 @@
+---
+- name: Configure Jenkins Master node
+  hosts: jenkins-master
+  remote_user: ubuntu
+  roles: 
+    - roles/install-docker
+
+- name: Configure webserver node
+  hosts: flask-webapp
+  remote_user: ubuntu
+  roles: 
+    - roles/install-docker

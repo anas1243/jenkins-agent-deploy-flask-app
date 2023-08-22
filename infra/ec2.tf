@@ -23,7 +23,10 @@ resource "aws_instance" "flask_webapp" {
   }
   depends_on = [ aws_instance.jenkins_master ]
   provisioner "local-exec" {
-    command = "printf '%s\n' '[jenkins-agent]' '${self.public_ip}' >> ../ansible/inventory"
-   
+    working_dir = "../ansible"
+    command = <<-EOT
+    printf '%s\n' '[flask-webapp]' '${self.public_ip}' >> inventory
+    ansible-playbook site.yaml --private-key ~/Downloads/gp_katoot.pem
+    EOT
   }
 }
