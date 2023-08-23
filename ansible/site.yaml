@@ -11,3 +11,4 @@
   remote_user: ubuntu
   roles: 
     - roles/install-docker
+    - roles/run-agent
