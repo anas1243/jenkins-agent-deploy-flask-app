@@ -1,2 +1,25 @@
 ---
 # tasks file for roles/run-master
+- name: Create jenkins home directory
+  ansible.builtin.file:
+    state: directory
+    path: /home/ubuntu/jenkins_home
+    owner: ubuntu
+    mode: u=rwx,g=rw,o=rw
+
+- name: Run jenkins controller container
+  community.docker.docker_container:
+    name: jenkins_master
+    state: started
+    ports:
+      - 8080:8080
+    mounts:
+      - source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        type: bind
+      - source: /home/ubuntu/jenkins_home
+        target: /var/jenkins_home
+        type: bind
+    restart_policy: always
+    detach: true
+    image: "anas1243/jenkins-with-docker"

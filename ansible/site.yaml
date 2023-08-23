@@ -4,6 +4,7 @@
   remote_user: ubuntu
   roles: 
     - roles/install-docker
+    - roles/run-master
 
 - name: Configure webserver node
   hosts: flask-webapp
