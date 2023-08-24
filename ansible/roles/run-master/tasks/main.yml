@@ -5,7 +5,7 @@
     state: directory
     path: /home/ubuntu/jenkins_home
     owner: ubuntu
-    mode: u=rwx,g=rw,o=rw
+    group: ubuntu
 
 - name: Run jenkins controller container
   community.docker.docker_container:
